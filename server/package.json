@@ -1,5 +1,9 @@
 {
     "name": "gurubooru",
+    "scripts": {
+        "start": "node server.js",
+        "watch": "nodemon"
+    },
     "dependencies": {
         "@apollo/server": "^4.10.0",
         "bcrypt": "^5.1.1",
