@@ -18,7 +18,6 @@ module.exports = {
     }
 
     if (!token) {
-        console.log("no token! rejecting!")
         return req
     }
 
