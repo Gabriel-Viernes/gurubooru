@@ -8,11 +8,16 @@ const typeDefs = `
         filename: String!
         
     }
+    type Auth {
+        token:ID!
+        user:User
+    }
     type Query {
         Users: [User]
     }
+
     type Mutation {
-        _dummyMutation: String    
+        createUser(username: String!, password:String!): Auth
     }
 `
 
