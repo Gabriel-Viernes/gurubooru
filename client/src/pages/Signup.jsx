@@ -9,7 +9,6 @@ export default function Signup() {
 
     const handleInputChange = (e) => {
         const { name, value } = event.target
-        console.log(value)
         if(name === 'usernameInput') {
             setUserFormData(userFormData.username + value)
         }
@@ -21,7 +20,6 @@ export default function Signup() {
     async function handleFormSubmit (event) {
         event.preventDefault()
         const form = event.currentTarget
-        console.log(userFormData.username)
         if(userFormData.username === '' || userFormData.password === '') {
 
             event.preventDefault()
@@ -35,6 +33,7 @@ export default function Signup() {
             })
             console.log(data)
             Auth.login(data.createUser.token)
+            window.location.reload()
             alert('Signup successful!')
         } catch (err) {
             alert('There was an error processing your request')

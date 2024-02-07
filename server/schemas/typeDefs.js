@@ -1,5 +1,6 @@
 const typeDefs = `
     type User {
+        _id: ID
         username: String!
         password: String!
         pictures: [Picture]
@@ -9,8 +10,8 @@ const typeDefs = `
         
     }
     type Auth {
-        token:ID!
-        user:User
+        token: ID!
+        user: User
     }
     type Query {
         Users: [User]
