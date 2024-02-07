@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { Form, Button, Alert } from 'react-bootstrap'
 import { useMutation } from '@apollo/client'
 import { CREATE_USER } from '../../utils/mutations'
-
 export default function Signup() {
     const [userFormData, setUserFormData] = useState({ username: '', password: ''})
     const [validated] = useState(false)
@@ -10,6 +9,7 @@ export default function Signup() {
 
     const handleInputChange = (e) => {
         const { name, value } = event.target
+        console.log(value)
         if(name === 'usernameInput') {
             setUserFormData(userFormData.username + value)
         }
@@ -20,21 +20,24 @@ export default function Signup() {
 
     async function handleFormSubmit (event) {
         event.preventDefault()
-        alert('Signup form submitted')
         const form = event.currentTarget
+        console.log(userFormData.username)
         if(userFormData.username === '' || userFormData.password === '') {
+
             event.preventDefault()
             event.stopPropagation()
             alert('Please enter a username or password')
+            return
         }
-
         try {
             const { data } = await createUser ({
                 variables: {...userFormData}
             })
             console.log(data)
             Auth.login(data.createUser.token)
+            alert('Signup successful!')
         } catch (err) {
+            alert('There was an error processing your request')
             console.error(err)
         }
         
