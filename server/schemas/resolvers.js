@@ -5,15 +5,13 @@ const { GraphQLError } = require('graphql')
 const resolvers = {
     Query: {
          findOneUser: async (parent, args, context) => {
-            console.log(context.User)
             if (args) {
-                console.log(args)
-                const data = await User.findOne({
-                    username: args.username,
-                    password: args.password
-                })
-                console.log(data)
-                return data
+                const user = await User.findOne({
+                    username: args.username
+                }).select('-__v -password')
+                const token = signToken(user)
+                console.log({ token, user})
+                return ({ token, user })
             }
 
             throw new GraphQLError('Could not authenticate user', {
