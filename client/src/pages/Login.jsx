@@ -38,8 +38,8 @@ export default function Login() {
                 }
             })
             Auth.login(data.loginUser.token)
+            alert('Login successful!')
             window.location.reload()
-            alert('Signup successful!')
         } catch (err) {
             alert('There was an error processing your request')
             console.error(err)
@@ -71,7 +71,7 @@ export default function Login() {
                 </input>
                 <button type='submit'>Submit</button>
             </form>
-            <Link to="/login">Don't have an account yet?</Link>
+            <Link to="/signup">Don't have an account yet?</Link>
         </>
 
     )
