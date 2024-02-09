@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { CREATE_USER } from '../../utils/mutations'
 import Auth from '../../utils/auth'
@@ -12,12 +12,10 @@ export default function Signup() {
         const { name, value } = e.target
         if(name === 'usernameInput') {
             setUserFormData({username:value, password:userFormData.password})
-            console.log(userFormData.username)
         }
         if(name === 'passwordInput') {
             setUserFormData({username:userFormData.username, password:value})
         }
-        console.log(userFormData.username, userFormData.password)
     }
 
     async function handleFormSubmit (event) {
@@ -30,15 +28,12 @@ export default function Signup() {
         }
         event.preventDefault()
         try {
-            console.log(userFormData)
-            console.log(userFormData.password)
             const { data } = await createUser ({
                 variables: {
                     username: userFormData.username,
                     password: userFormData.password
                 }
             })
-            console.log(data)
             Auth.login(data.createUser.token)
             window.location.reload()
             alert('Signup successful!')

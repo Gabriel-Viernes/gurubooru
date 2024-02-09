@@ -20,6 +20,7 @@ const typeDefs = `
 
     type Mutation {
         createUser(username: String!, password:String!): Auth
+        loginUser(username: String!, password: String!): Auth
     }
 `
 
