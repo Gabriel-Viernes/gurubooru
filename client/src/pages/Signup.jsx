@@ -9,18 +9,18 @@ export default function Signup() {
     const [createUser, {error}] = useMutation(CREATE_USER)
 
     const handleInputChange = (e) => {
-        const { name, value } = event.target
+        const { name, value } = e.target
         if(name === 'usernameInput') {
-            setUserFormData(userFormData.username + value)
+            setUserFormData({username:value, password:userFormData.password})
+            console.log(userFormData.username)
         }
         if(name === 'passwordInput') {
-            setUserFormData(userFormData.password + value)
+            setUserFormData({username:userFormData.username, password:value})
         }
+        console.log(userFormData.username, userFormData.password)
     }
 
     async function handleFormSubmit (event) {
-        event.preventDefault()
-        const form = event.currentTarget
         if(userFormData.username === '' || userFormData.password === '') {
 
             event.preventDefault()
@@ -28,9 +28,15 @@ export default function Signup() {
             alert('Please enter a username or password')
             return
         }
+        event.preventDefault()
         try {
+            console.log(userFormData)
+            console.log(userFormData.password)
             const { data } = await createUser ({
-                variables: {...userFormData}
+                variables: {
+                    username: userFormData.username,
+                    password: userFormData.password
+                }
             })
             console.log(data)
             Auth.login(data.createUser.token)
