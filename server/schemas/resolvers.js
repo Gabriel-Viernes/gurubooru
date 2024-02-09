@@ -9,6 +9,7 @@ const resolvers = {
         createUser: async (parent, args) => {
             try {
                 console.log('parent',{parent})
+                console.log('args',{args})
                 const user = await User.create(args)
                 const token = signToken(user)
                 return { token, user}
