@@ -1,5 +1,10 @@
+import { useState } from 'react'
+import { useQuery } from '@apollo/client'
+
+
 export default function Login() {
+
     return (
-        <h1>u reach login page</h1>
+        <p>u reach login</p>
     )
 }

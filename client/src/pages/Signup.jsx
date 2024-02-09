@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import { Form, Button, Alert } from 'react-bootstrap'
 import { useMutation } from '@apollo/client'
 import { CREATE_USER } from '../../utils/mutations'
 import Auth from '../../utils/auth'
+import { Link } from 'react-router-dom'
 
 export default function Signup() {
     const [userFormData, setUserFormData] = useState({ username: '', password: ''})
@@ -54,22 +54,25 @@ export default function Signup() {
         })
     }   
     return (
-        <form onSubmit={handleFormSubmit}>
-            <h1>Sign up here!</h1>
-            <input 
-                name="usernameInput" 
-                placeholder="username" 
-                value={userFormData.username}
-                onChange={handleInputChange}>
-            </input>
-            <input 
-                name="passwordInput" 
-                placeholder="password" 
-                value={userFormData.password} 
-                type="password"
-                onChange={handleInputChange}>
-            </input>
-            <button type='submit'>Submit</button>
-        </form>
+        <>
+            <form onSubmit={handleFormSubmit} className="signup">
+                <h1>Sign up here!</h1>
+                <input 
+                    name="usernameInput" 
+                    placeholder="username" 
+                    value={userFormData.username}
+                    onChange={handleInputChange}>
+                </input>
+                <input 
+                    name="passwordInput" 
+                    placeholder="password" 
+                    value={userFormData.password} 
+                    type="password"
+                    onChange={handleInputChange}>
+                </input>
+                <button type='submit'>Submit</button>
+            </form>
+            <Link to="/login">Already have an account?</Link>
+        </>
     )
 }

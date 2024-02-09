@@ -63,3 +63,8 @@
     text-decoration: none;
     color: black;
 }
+
+.signup {
+    display: flex;
+    flex-direction: column;
+}
