@@ -14,7 +14,8 @@ const typeDefs = `
         user: User
     }
     type Query {
-        Users: [User]
+        findAllUsers: [User]
+        findOneUser(username: String!, password:String!): Auth
     }
 
     type Mutation {

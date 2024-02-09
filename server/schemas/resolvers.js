@@ -1,9 +1,33 @@
 const { User } = require('../models')
 const { signToken, AuthenticationError } = require('../utils/auth')
+const { GraphQLError } = require('graphql')
 
 const resolvers = {
     Query: {
+         findOneUser: async (parent, args, context) => {
+            console.log(context.User)
+            if (args) {
+                console.log(args)
+                const data = await User.findOne({
+                    username: args.username,
+                    password: args.password
+                })
+                console.log(data)
+                return data
+            }
 
+            throw new GraphQLError('Could not authenticate user', {
+                extensions: {
+                    code: 'LMAO'
+                }
+            }
+
+            )
+        },
+        findAllUsers: async (parent, args) => {
+            const data = await User.find()
+            return data
+        }
     },
     Mutation: {
         createUser: async (parent, args) => {
