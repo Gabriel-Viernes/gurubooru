@@ -5,16 +5,22 @@ const Image = mongoose.model(
     new mongoose.Schema({
         filename: {
             type: String,
-            require: true,
+            required: true,
             unique: true
         },
         uploader: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
+            ref: "User",
+            required: true
         }, 
         tags: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Tag"
+        },
+        score: {
+            type: Number,
+            required: true,
+            default: 0
         }
     })
 )

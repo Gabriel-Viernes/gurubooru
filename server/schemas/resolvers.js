@@ -2,7 +2,6 @@ const { User, Image, Tag } = require('../models')
 const { signToken, AuthenticationError } = require('../utils/auth')
 const { GraphQLError } = require('graphql')
 
-console.log(User, Image, Tag)
 
 const resolvers = {
     Query: {
@@ -63,7 +62,7 @@ const resolvers = {
             }
             const token = signToken(user)
             return ({ token, user })
-        }
+            }
 
             throw new GraphQLError('Could not authenticate user', {
                 extensions: {
