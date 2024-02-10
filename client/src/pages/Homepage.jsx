@@ -9,7 +9,10 @@ export default function Homepage() {
                 <ul>
                     {
                         Auth.loggedIn() ? (
-                            <li><Link onClick={Auth.logout}>Logout</Link></li>
+                            <>
+                                <li><Link onClick={Auth.logout}>Logout</Link></li>
+                                <li><Link to='/upload'>Upload</Link></li>
+                            </>
                         ) : (
                             <>
                                 <li><Link to='/login'>Login</Link></li>

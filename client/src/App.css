@@ -64,7 +64,8 @@
     color: black;
 }
 
-.signup {
+.signup, .uploadForm {
     display: flex;
     flex-direction: column;
 }
+

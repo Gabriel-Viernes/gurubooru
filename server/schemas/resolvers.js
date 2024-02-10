@@ -68,7 +68,7 @@ const resolvers = {
                     code: 'LOGIN_AUTHENTICATION_FAILED'
                 }
             })
-        }
+        },
     }
 }
 
