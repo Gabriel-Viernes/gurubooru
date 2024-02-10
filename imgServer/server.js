@@ -20,9 +20,8 @@ const app = express()
 const PORT = process.env.PORT || 3002;
 
 app.post('/', upload.single('upload'), async (req, res) => {
-    console.log('lmao')
     console.log(req.file)
-    res.send('request received')
+    res.redirect('http://localhost:3000/')
     
 })
 

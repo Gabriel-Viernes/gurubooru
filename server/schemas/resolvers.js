@@ -1,6 +1,8 @@
-const { User } = require('../models')
+const { User, Image, Tag } = require('../models')
 const { signToken, AuthenticationError } = require('../utils/auth')
 const { GraphQLError } = require('graphql')
+
+console.log(User, Image, Tag)
 
 const resolvers = {
     Query: {
