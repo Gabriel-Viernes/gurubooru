@@ -23,3 +23,14 @@ export const LOGIN_USER = gql `
         }
     }
 `
+
+export const CREATE_IMAGE = gql `
+    mutation createImage($filename: String!, $uploader: ID) {
+  createImage(filename: $filename, uploader: $uploader) {
+    filename
+    score
+    uploader
+  }
+}
+
+`

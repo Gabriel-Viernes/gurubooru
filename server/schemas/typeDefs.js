@@ -6,12 +6,20 @@ const typeDefs = `
         _id: ID
         username: String!
         password: String!
-        pictures: [Picture]
+        uploads: [Image]
+        
     }
 
-    type image {
+    type Image {
         filename: String!
-        
+        uploader: ID
+        tags:[Tag]
+        score: Int!
+    }
+
+    type Tag {
+        name: String!
+        imagesWithThisTag:[Image]
     }
 
     type Auth {

@@ -17,6 +17,7 @@
     "react-bootstrap": "^2.7.4",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.11.2",
+    "uuid": "^9.0.1",
     "vitest": "^1.2.2"
   },
   "devDependencies": {
