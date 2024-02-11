@@ -1,7 +1,18 @@
 import { useState } from 'react'
+import { v4 as uuid } from 'uuid'
+import decode from 'jwt-decode'
+import Auth from '../../utils/auth.js'
+
+
 
 
 export default function Upload() {
+    let decoded;
+    if(Auth.loggedIn() === false ) {
+        window.location.assign('/login')
+    } else {
+        decoded = decode(localStorage.getItem('id_token'))
+    }
 
     const [userFormData, setUserFormData] = useState({
         username:'',
@@ -22,8 +33,9 @@ export default function Upload() {
     }
 
     return (
-            <form className='uploadform' action='http://localhost:3002' onSubmit={handleFileUpload} method='post' encType='multipart/form-data'>
+            <form className='uploadForm' action='http://localhost:3002' onSubmit={handleFileUpload} method='post' encType='multipart/form-data'>
                 <input type='file' id='upload' name='upload'></input>
+                <textarea name='tags' value="Enter tags here, with each tag separated by a space. Tags with two words should have an underline between each word (Ex: sunset tail steam_engine)"></textarea>
                 <button className='submit' value="submit">Upload!</button>
             </form>
     )
