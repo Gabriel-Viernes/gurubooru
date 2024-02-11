@@ -12,7 +12,7 @@ const typeDefs = `
 
     type Image {
         filename: String!
-        uploader: String!
+        uploader: ID
         tags:[Tag]
         score: Int!
     }

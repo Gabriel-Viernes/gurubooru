@@ -1,7 +1,9 @@
 import { useState } from 'react'
+import { useMutation } from '@apollo/client'
 import { v4 as uuid } from 'uuid'
 import decode from 'jwt-decode'
 import Auth from '../../utils/auth.js'
+import { CREATE_IMAGE } from '../../utils/mutations.js'
 
 export default function Upload() {
     let filename = uuid()
@@ -10,13 +12,14 @@ export default function Upload() {
         window.location.assign('/login')
     } else {
         decoded = decode(localStorage.getItem('id_token'))
+        console.log(decoded.data)
     }
 
     const [userFormData, setUserFormData] = useState({
         username:'',
         password:''
     })
-    //const [uploadPicture, { error }] = useMutation(UPLOAD_PICTURE)
+    const [createImage, { error }] = useMutation(CREATE_IMAGE)
     //const [add]
 
     const handleInputChange = (e) => {
@@ -26,7 +29,12 @@ export default function Upload() {
     }
 
     async function handleFileUpload() {
-        console.log('hello')
+        const { data } = await createImage({
+            variables: {
+                filename: filename,
+                uploader: decoded.data._id
+            }
+        })
 
     }
 
