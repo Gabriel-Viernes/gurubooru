@@ -35,6 +35,7 @@ export default function Upload() {
                 tags: tags
             }
         })
+        console.log(data)
 
     }
 

@@ -113,9 +113,8 @@ const resolvers = {
                 foundTags.map((match) => {
                     matches.set(match[0],match[0])
                 })
-                console.log(matches)
                 matches.forEach((match) => {
-
+                    console.log(match)
                 })
                 return args
             }
