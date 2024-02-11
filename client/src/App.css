@@ -63,3 +63,9 @@
     text-decoration: none;
     color: black;
 }
+
+.signup, .uploadForm {
+    display: flex;
+    flex-direction: column;
+}
+

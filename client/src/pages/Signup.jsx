@@ -1,26 +1,24 @@
-import { useState, useEffect } from 'react'
-import { Form, Button, Alert } from 'react-bootstrap'
+import { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { CREATE_USER } from '../../utils/mutations'
 import Auth from '../../utils/auth'
+import { Link } from 'react-router-dom'
 
 export default function Signup() {
     const [userFormData, setUserFormData] = useState({ username: '', password: ''})
     const [createUser, {error}] = useMutation(CREATE_USER)
 
     const handleInputChange = (e) => {
-        const { name, value } = event.target
+        const { name, value } = e.target
         if(name === 'usernameInput') {
-            setUserFormData(userFormData.username + value)
+            setUserFormData({username:value, password:userFormData.password})
         }
         if(name === 'passwordInput') {
-            setUserFormData(userFormData.password + value)
+            setUserFormData({username:userFormData.username, password:value})
         }
     }
 
     async function handleFormSubmit (event) {
-        event.preventDefault()
-        const form = event.currentTarget
         if(userFormData.username === '' || userFormData.password === '') {
 
             event.preventDefault()
@@ -28,11 +26,14 @@ export default function Signup() {
             alert('Please enter a username or password')
             return
         }
+        event.preventDefault()
         try {
             const { data } = await createUser ({
-                variables: {...userFormData}
+                variables: {
+                    username: userFormData.username,
+                    password: userFormData.password
+                }
             })
-            console.log(data)
             Auth.login(data.createUser.token)
             window.location.reload()
             alert('Signup successful!')
@@ -48,22 +49,25 @@ export default function Signup() {
         })
     }   
     return (
-        <form onSubmit={handleFormSubmit}>
-            <h1>Sign up here!</h1>
-            <input 
-                name="usernameInput" 
-                placeholder="username" 
-                value={userFormData.username}
-                onChange={handleInputChange}>
-            </input>
-            <input 
-                name="passwordInput" 
-                placeholder="password" 
-                value={userFormData.password} 
-                type="password"
-                onChange={handleInputChange}>
-            </input>
-            <button type='submit'>Submit</button>
-        </form>
+        <>
+            <form onSubmit={handleFormSubmit} className="signup">
+                <h1>Sign up here!</h1>
+                <input 
+                    name="usernameInput" 
+                    placeholder="username" 
+                    value={userFormData.username}
+                    onChange={handleInputChange}>
+                </input>
+                <input 
+                    name="passwordInput" 
+                    placeholder="password" 
+                    value={userFormData.password} 
+                    type="password"
+                    onChange={handleInputChange}>
+                </input>
+                <button type='submit'>Submit</button>
+            </form>
+            <Link to="/login">Already have an account?</Link>
+        </>
     )
 }
