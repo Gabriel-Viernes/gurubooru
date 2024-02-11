@@ -3,16 +3,15 @@ const express = require('express')
 const { v4: uuidv4 } = require('uuid')
 const multer = require('multer')
 
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'cache/')
     },
     filename: function (req, file, cb) {
-        let id = uuidv4()
-        let newFilename = id.slice(id.length-5, id.length)
-        req.uuid = id
+        console.log(req.body)
         let ext = '.png'
-        cb(null, `${newFilename}${ext}`)
+        cb(null, `${req.body.filename}${ext}`)
     }
 })
 const upload = multer ({ storage: storage})
@@ -20,7 +19,7 @@ const app = express()
 const PORT = process.env.PORT || 3002;
 
 app.post('/', upload.single('upload'), async (req, res) => {
-    console.log(req.file)
+    console.log(req.body)
     res.redirect('http://localhost:3000/')
     
 })

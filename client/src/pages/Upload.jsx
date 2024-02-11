@@ -12,13 +12,8 @@ export default function Upload() {
         window.location.assign('/login')
     } else {
         decoded = decode(localStorage.getItem('id_token'))
-        console.log(decoded.data)
     }
 
-    const [userFormData, setUserFormData] = useState({
-        username:'',
-        password:''
-    })
     const [createImage, { error }] = useMutation(CREATE_IMAGE)
     //const [add]
 
@@ -40,10 +35,9 @@ export default function Upload() {
 
     return (
             <form className='uploadForm' onSubmit={handleFileUpload}  action='http://localhost:3002' method='post' encType='multipart/form-data'>
-                <input type='file' id='upload' name='upload'></input>
                 <textarea name='tags' value="Enter tags here, with each tag separated by a space. Tags with two words should have an underline between each word (Ex: sunset tail steam_engine)"></textarea>
-                <p style={{display: "none"}} value={decoded.data.username}></p>
-                <p stype={{display: "none"}} value={filename}></p>
+                <input name='filename' style={{display: "none"}} value={filename}></input>
+                <input type='file' id='upload' name='upload'></input>
                 <button className='submit' value="submit">Upload!</button>
             </form>
     )
