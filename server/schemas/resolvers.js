@@ -114,6 +114,9 @@ const resolvers = {
                     matches.set(match[0],match[0])
                 })
                 console.log(matches)
+                matches.forEach((match) => {
+
+                })
                 return args
             }
             
@@ -146,7 +149,11 @@ const resolvers = {
                     code: 'UNABLE_TO_TAG_IMAGE'
                 }
             })
-        }
+        },
+        addImageToTag: async (parent, args) => {
+            return 'lmao'
+        },
+
 
     }
 }

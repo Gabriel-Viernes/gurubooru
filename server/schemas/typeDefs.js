@@ -11,13 +11,15 @@ const typeDefs = `
     }
 
     type Image {
+        _id: ID
         filename: String!
         uploader: ID
-        tags:[Tag]
+        tags: [Tag]
         score: Int!
     }
 
     type Tag {
+        _id: ID
         name: String!
         imagesWithThisTag:[Image]
     }
@@ -44,6 +46,7 @@ const typeDefs = `
         createImage(filename: String!, uploader: ID, tags: String): Image
         createTag(name: String!): Tag
         addTag(pictureId: ID!, tagId: ID!): Image
+        addImageToTag(pictureId: ID!, tagId:ID!): Tag
     }
 `
 
