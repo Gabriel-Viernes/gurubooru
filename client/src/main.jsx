@@ -7,6 +7,7 @@ import Login from './pages/Login.jsx'
 import Signup from './pages/Signup.jsx'
 import App from './App.jsx'
 import Upload from './pages/Upload.jsx'
+import Results from './pages/Results.jsx'
 import './index.css'
 
 const router = createBrowserRouter([
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
             {
                 path:'/upload',
                 element: <Upload />
+            },
+            {
+                path:'/results',
+                element: <Results />
             }
         ]
     }

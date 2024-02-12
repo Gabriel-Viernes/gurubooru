@@ -2,6 +2,11 @@ import { Link } from "react-router-dom"
 import Auth from '../../utils/auth'
 
 export default function Homepage() {
+
+    function handleInput(name, value) {
+
+    }
+
     return (
         <>
             <div className="home">
@@ -23,7 +28,7 @@ export default function Homepage() {
                 </ul>
                 <input placeholder='Search tags here!'></input>
             </div>
-            <button>Search</button>
+            <button><Link to="/results">Search</Link></button>
             <p className="notice">Unfortunately, this website does not support Firefox at the moment. Please use a Chromium based browser (Google Chrome, Brave) instead</p>
         </>
     )

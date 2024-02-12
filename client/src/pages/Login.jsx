@@ -39,7 +39,7 @@ export default function Login() {
             })
             Auth.login(data.loginUser.token)
             alert('Login successful!')
-            window.location.reload()
+            window.location.assign('/')
         } catch (err) {
             alert('There was an error processing your request')
             console.error(err)
