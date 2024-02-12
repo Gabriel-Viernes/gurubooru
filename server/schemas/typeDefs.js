@@ -40,11 +40,15 @@ const typeDefs = `
 
     }
 
+    input tagsAssignedToImage {
+        _id: ID
+    }
+
     type Mutation {
         createUser(username: String!, password:String!): Auth
         loginUser(username: String!, password: String!): Auth
         createImage(filename: String!, uploader: ID, tags: String): Image
-        createTag(name: String!): Tag
+        createTag(name: String!, imagesWithThisTag: [tagsAssignedToImage]): Tag
         addTag(pictureId: ID!, tagId: ID!): Image
         addImageToTag(pictureId: ID!, tagId:ID!): Tag
     }
