@@ -110,28 +110,21 @@ const resolvers = {
                 await Image.create({
                     filename: args.filename,
                     uploader: args.uploader
-                }).then(async function(data) {
-                    createdImage = data
+                }).then(async function(createdImage) {
                     console.log(`new image _id${createdImage._id}`)
                     let matches = new Map()
-                    let matchArray = []
                     let regex = /(?<!\S)([a-z]+)_([a-z]+)(?!\S)|(?<!\S)([a-z]+)(?!\S)/gm
                     let foundTags = [...args.tags.matchAll(regex)]
                     foundTags.map((match) => {
                         matches.set(match[0],match[0])
                     })
-                    let a = 0
-                    matches.forEach((match) => {
-                        matchArray.push(match)
-                    })
-                    console.log(matchArray)
-                    for(let i = 0; i < matchArray.length; i++) {
-                        await Tag.findOne({ name: matchArray[i]}).then(async function(matchedTag) {
+                    matches.forEach(async function(match) {
+                        await Tag.findOne({ name: match}).then(async function(matchedTag) {
                             console.log(`matchedTag is ${matchedTag}`)
                             //data is either null or a Tag object
                             if(matchedTag === null) {
                                 await Tag.create({
-                                    name: matchArray[i],
+                                    name: match,
                                     imagesWithThisTag: [{_id: createdImage._id}]
                                 }).then(async function(createdTag) {
                                     console.log(createdTag)
@@ -146,13 +139,12 @@ const resolvers = {
                                     { _id: createdImage._id },
                                     { $push: { tags: matchedTag._id }},
                                     { new: true }
-                                ).then((data) => console.log(`added to image ${data}`))
+                                ).then((data) => console.log(`tag added to image ${data}`))
                             }
                         })
-                    }
+                    })
 
                 })
-                //this terribleness uses regex to pull words from user input, then uses a map to remove duplicates, then transfers the map to an array since mongoose doesn't like making queries from within a forEach(). Too bad!
                                 return args
             }
             
