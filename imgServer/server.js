@@ -28,6 +28,7 @@ function parseMimetype(mimetype) {
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
+        //replace with cache/images/ if sharp is being used
         cb(null, 'cache/')
     },
     filename: function (req, file, cb) {
@@ -54,11 +55,11 @@ const app = express()
 const PORT = process.env.PORT || 3002;
 
 app.post('/', upload.single('upload'), async (req, res) => {
-    sharp(`./cache/${req.file.filename}`)
-        .resize(500,500)
-        .toFile(`./cache/thumbnail-${req.body.filename}`, (err, info) => {
-            console.log(err, info)
-        })
+    //sharp(`./cache/images/${req.file.filename}`)
+    //    .resize(500,500)
+    //    .toFile(`./cache/thumbnails/thumbnail-${req.body.filename}`, (err, info) => {
+    //        console.log(err)
+    //    })
     res.redirect('http://localhost:3000/')
 })
 
@@ -66,5 +67,10 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'cache')));
 
-app.listen(PORT, () => console.log(`Image server listening on ${PORT}`))
+app.listen(PORT, () => {
+    console.log(`=================================`)
+    console.log(`Image server listening on ${PORT}`)
+    console.log(`=================================`)
+})
+
 
