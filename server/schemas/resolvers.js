@@ -105,6 +105,7 @@ const resolvers = {
             })
         },
         createImage: async (parent, args) => {
+            console.log(`gql filename: ${args.filename}`)
             let createdImage
             if(args) {
                 await Image.create({

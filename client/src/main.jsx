@@ -8,6 +8,7 @@ import Signup from './pages/Signup.jsx'
 import App from './App.jsx'
 import Upload from './pages/Upload.jsx'
 import Results from './pages/Results.jsx'
+import SingleImage from './pages/SingleImage.jsx'
 import './index.css'
 
 const router = createBrowserRouter([
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
             {
                 path:'/results/?search',
                 element: <Results />
+            },
+            {
+                path:'/cdn/:filename',
+                element: <SingleImage />
             }
         ]
     }

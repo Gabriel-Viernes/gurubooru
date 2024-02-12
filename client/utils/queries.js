@@ -7,3 +7,18 @@ export const FIND_ONE_USER = gql `
             password
         }
     }`
+
+export const FIND_ALL_IMAGES = gql `
+    query findAllImages {
+      findAllImages {
+        _id
+        filename
+        score
+        uploader
+        tags {
+          _id
+          name
+        }
+      }
+    }
+`

@@ -6,7 +6,6 @@ import Auth from '../../utils/auth.js'
 import { CREATE_IMAGE } from '../../utils/mutations.js'
 
 export default function Upload() {
-    let filename = uuid()
     let decoded;
     if(Auth.loggedIn() === false ) {
         window.location.assign('/login')
@@ -17,6 +16,7 @@ export default function Upload() {
     const [tags, setTags] = useState('')
     const [mimetype, setMimetype] = useState('')
     const [disableButton, setDisableButton] = useState(true)
+    const [filename, setFilename] = useState(uuid())
 
     const [createImage, { error }] = useMutation(CREATE_IMAGE)
     //const [add]
