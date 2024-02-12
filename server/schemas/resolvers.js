@@ -9,7 +9,7 @@ const resolvers = {
             if (args) {
                 const user = await User.findOne({
                     username: args.username
-                }).select('-__v -password')
+                }).select('-__v -password').populate('uploads')
                 const token = signToken(user)
                 console.log({ token, user})
                 return ({ token, user })
@@ -24,18 +24,18 @@ const resolvers = {
             )
         },
         findAllUsers: async (parent, args) => {
-            const data = await User.find()
+            const data = await User.find().populate('uploads')
             return data
         },
         findAllTags: async (parent, args) => {
-            const data = await Tag.find()
+            const data = await Tag.find().populate('imagesWithThisTag')
             return data
         },
         findOneTag: async (parent,args) => {
             if(args) {
                 const tag = await Tag.findOne({
                     name:args.name
-                })
+                }).populate('imagesWithThisTag')
                 return tag
             }
             
@@ -46,14 +46,14 @@ const resolvers = {
             })
         },
         findAllImages: async (parent, args) => {
-            const data = await Image.find()
+            const data = await Image.find().populate('tags')
             return data
         },
         findOneImage: async (parent, args) => {
             if(args) {
                 const data = await Image.findOne({
                     filename: args.filename
-                })
+                }).populate('tags')
                 return data
             }
 
@@ -171,7 +171,7 @@ const resolvers = {
                     { _id: args.pictureId },
                     { $push: { tags: args.tagId }},
                     { new: true }
-                )
+                ).populate('tags')
                 return data
             }
             
@@ -182,7 +182,21 @@ const resolvers = {
             })
         },
         addImageToTag: async (parent, args) => {
-            return 'lmao'
+            if(args) {
+                const data = Tag.findOneAndUpdate(
+                    { _id: args.tagId },
+                    { $push: { imagesWithThisTag: args.pictureId }},
+                    { new: true }
+                ).populate('imagesWithThisTag')
+                return data
+            }
+
+            throw new GraphQLError('Unable to add image to tag', {
+                extensions: {
+                    code: 'UNABLE_TO_ADD_IMAGE_TO_TAG'
+                }
+            })
+
         },
 
 
