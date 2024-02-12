@@ -5,6 +5,5 @@ export default function Results() {
     console.log(urlParams.get('tags'))
     return (
         <p>hello</p>
-        
     )
 }

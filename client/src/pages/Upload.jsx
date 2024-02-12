@@ -15,22 +15,37 @@ export default function Upload() {
     }
 
     const [tags, setTags] = useState('')
+    const [mimetype, setMimetype] = useState('')
+    const [disableButton, setDisableButton] = useState(true)
 
     const [createImage, { error }] = useMutation(CREATE_IMAGE)
     //const [add]
 
+    let mimetypeRegex = /(.png|.jpg|.gif|.webm)/
 
     const handleInputChange = (e) => {
         const { name, value } = e.target
         if(name === "tagsInput") {
             setTags(value)
         }
+        if(name === "upload") {
+            let matchArray = value.match(mimetypeRegex)
+            console.log(matchArray)
+            if(matchArray === null) {
+                setDisableButton(true)
+                alert('Invalid filetype detected, please upload only png, jpg, or gif')
+            } else {
+                setMimetype(matchArray[0])
+                setDisableButton(false)
+            }
+
+        }
     }
 
     async function handleFileUpload() {
         const { data } = await createImage({
             variables: {
-                filename: filename,
+                filename: `${filename}${mimetype}`,
                 uploader: decoded.data._id,
                 tags: tags
             }
@@ -45,8 +60,8 @@ export default function Upload() {
             <form className='uploadForm' onSubmit={handleFileUpload}  action='http://localhost:3002' method='post' encType='multipart/form-data'>
                 <textarea onChange={handleInputChange} name='tagsInput' value={tags} placeholder="Enter tags here, with each tag separated by a space. Tags with two words should have an underline between each word (Ex: sunset tail steam_engine)"></textarea>
                 <input name='filename' style={{display: "none"}} value={filename}></input>
-                <input type='file' id='upload' name='upload'></input>
-                <button className='submit' value="submit">Upload!</button>
+                <input onChange={handleInputChange} type='file' id='upload' name='upload'></input>
+                <button disabled={disableButton} className='submit' value="submit">Upload!</button>
             </form>
     )
 }
