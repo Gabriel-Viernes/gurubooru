@@ -111,7 +111,7 @@ const resolvers = {
                     filename: args.filename,
                     uploader: args.uploader
                 }).then(async function(createdImage) {
-                    console.log(`new image _id${createdImage._id}`)
+                    console.log(`New image reference created ${createdImage._id}`)
                     let matches = new Map()
                     let regex = /(?<!\S)([a-z]+)_([a-z]+)(?!\S)|(?<!\S)([a-z]+)(?!\S)/gm
                     let foundTags = [...args.tags.matchAll(regex)]

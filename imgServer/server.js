@@ -2,6 +2,7 @@ const path = require('path')
 const express = require('express')
 const { v4: uuidv4 } = require('uuid')
 const multer = require('multer')
+const sharp = require('sharp')
 
 function parseMimetype(mimetype) {
     switch(mimetype) {
@@ -53,6 +54,11 @@ const app = express()
 const PORT = process.env.PORT || 3002;
 
 app.post('/', upload.single('upload'), async (req, res) => {
+    sharp(`./cache/${req.file.filename}`)
+        .resize(500,500)
+        .toFile(`./cache/thumbnail-${req.body.filename}`, (err, info) => {
+            console.log(err, info)
+        })
     res.redirect('http://localhost:3000/')
 })
 
