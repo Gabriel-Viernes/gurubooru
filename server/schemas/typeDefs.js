@@ -33,6 +33,8 @@ const typeDefs = `
         findOneUser(username: String!, password:String!): Auth
         findAllTags: [Tag]
         findOneTag(name: String!): Tag
+        findAllImages: [Image]
+        findOneImage(filename: String!): Image
 
     }
 
@@ -41,6 +43,7 @@ const typeDefs = `
         loginUser(username: String!, password: String!): Auth
         createImage(filename: String!, uploader: ID, tags: String): Image
         createTag(name: String!): Tag
+        addTag(pictureId: ID!, tagId: ID!): Image
     }
 `
 

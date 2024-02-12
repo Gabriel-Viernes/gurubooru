@@ -45,6 +45,24 @@ const resolvers = {
                 }
             })
         },
+        findAllImages: async (parent, args) => {
+            const data = await Image.find()
+            return data
+        },
+        findOneImage: async (parent, args) => {
+            if(args) {
+                const data = await Image.findOne({
+                    filename: args.filename
+                })
+                return data
+            }
+
+            throw new GraphQLError('Could not find image', {
+                extensions: {
+                    code: 'IMAGE_NOT_FOUND'
+                }
+            })
+        }
     },
     Mutation: {
         createUser: async (parent, args) => {
@@ -109,6 +127,23 @@ const resolvers = {
             throw new GraphQLError('Unable to create tag', {
                 extensions: {
                     code: 'UNABLE_TO_CREATE_TAG'
+                }
+            })
+        },
+        addTag: async (parent, args) => {
+            if(args) {
+                const tagId = args.tagId
+                const data = Image.findOneAndUpdate(
+                    { _id: args.pictureId },
+                    { $push: { tags: { tagId }}},
+                    { new: true }
+                )
+                return data
+            }
+            
+            throw new GraphQLError('Unable to add tag to image', {
+                extensions: {
+                    code: 'UNABLE_TO_TAG_IMAGE'
                 }
             })
         }
