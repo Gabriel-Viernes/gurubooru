@@ -36,7 +36,7 @@ const typeDefs = `
     type Mutation {
         createUser(username: String!, password:String!): Auth
         loginUser(username: String!, password: String!): Auth
-        createImage(filename: String!, uploader: ID): Image
+        createImage(filename: String!, uploader: ID, tags: String): Image
     }
 `
 

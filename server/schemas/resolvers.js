@@ -71,6 +71,9 @@ const resolvers = {
         createImage: async (parent, args) => {
             if(args) {
                 console.log(args)
+                let regex = /(?<!\S)([a-z]+\b-\b[a-z]+\b[!?.,])(?!\S)|(?<!\S)([a-z]+\b-\b[a-z]+\b)(?!\S)|(?<!\S)([a-z]+[!?.,])(?!\S)|(?<!\S)([a-z]+)(?!\S)|(?<!\S)[?!,.](?!\S)/gm
+                let foundTags = [...args.tags.matchAll(regex)]
+                console.log(foundTags)
                 return args
             }
             
