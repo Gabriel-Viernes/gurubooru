@@ -18,16 +18,20 @@ export default function Results() {
     const extractTagsFromImages = function(data) {
         let length;
         let tagList = new Map()
+        let tagArray = []
         data.findAllImages.length > 50 ? length = 50 : length = data.findAllImages.length
         for(let i = 0; i < length; i++) {
             data.findAllImages[i].tags.forEach((tag) => {
-                tagList.set('tag','tag')
+                tagList.set(tag.name,tag.name)
             })
         }
-        console.log(tagList)
+        tagList.forEach((tag) => {
+            tagArray.push(tag)
+        })
+        return tagArray
     }
-    extractTagsFromImages(data)
-
+    const extractedTags = extractTagsFromImages(data)
+    console.log(extractedTags)
     //filename path is data.findAllImages[i].filename
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
@@ -36,8 +40,14 @@ export default function Results() {
     return (
         <>
             <Header />
-            <div>
-                <div className='tagList'>
+            <div className='content-container'>
+                <div className='tag-list'>
+                    <h4>Tags</h4>
+                    {extractedTags.map((tag) => {
+                        return (
+                            <Link>{tag}</Link>
+                        )}
+                    )}
                 </div>
                 <div className='image-section'>
                     {data.findAllImages.map((image) => {
