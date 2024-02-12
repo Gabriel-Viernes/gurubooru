@@ -132,8 +132,15 @@ const resolvers = {
                             if(matchedTag === null) {
                                 await Tag.create({
                                     name: matchArray[i],
-                                    imagesWithThisTag: {$push: createdImage._id}
-                                }).then((data) => console.log(data))
+                                    imagesWithThisTag: [{_id: createdImage._id}]
+                                }).then(async function(createdTag) {
+                                    console.log(createdTag)
+                                    await Image.findOneAndUpdate(
+                                        { _id: createdImage._id },
+                                        { $push: { tags: createdTag._id }},
+                                        { new: true }
+                                    ).then((data) => console.log(`tag added to image ${data}`))
+                                })
                             } else {
                                 await Image.findOneAndUpdate(
                                     { _id: createdImage._id },
