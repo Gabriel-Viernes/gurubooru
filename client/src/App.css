@@ -69,3 +69,37 @@
     flex-direction: column;
 }
 
+.image-section {
+    display: flex;
+    flex-direction: row;
+}
+
+.image-container {
+    height: 300px;
+    margin: .5em;
+}
+
+.image-container img {
+    height: 150px;
+}
+
+.component-header {
+    text-align: left;
+}
+
+.component-header h1 {
+    margin: 0;
+}
+
+.component-header ul {
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.component-header li {
+    color: black;
+    padding: 0 1em 0 1em;
+}

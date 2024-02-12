@@ -17,6 +17,7 @@ export default function Upload() {
     const [mimetype, setMimetype] = useState('')
     const [disableButton, setDisableButton] = useState(true)
     const [filename, setFilename] = useState(uuid())
+    console.log(filename)
 
     const [createImage, { error }] = useMutation(CREATE_IMAGE)
     //const [add]

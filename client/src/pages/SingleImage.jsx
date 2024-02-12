@@ -1,6 +1,7 @@
 export default function SingleImage() {
-    console.log(req.params)
+    let filenameRegex = /([a-z0-9-_.]+)$/gm
+    let matched = window.location.href.match(filenameRegex)
     return (
-        <p>test</p>
+        <img src={`http://localhost:3002${matched}.png`}></img>
     )
 }

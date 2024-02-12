@@ -54,7 +54,7 @@ const upload = multer ({
 const app = express()
 const PORT = process.env.PORT || 3002;
 app.get('/:filename', async (req, res) => {
-    res.send(`<img src="${req.params.filename}"></img>`)
+    res.sendFile(__dirname + `/cache/${req.params.filename}`)
 })
 
 app.post('/', upload.single('upload'), async (req, res) => {
@@ -68,7 +68,7 @@ app.post('/', upload.single('upload'), async (req, res) => {
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}));
-app.use(express.static(path.join(__dirname, 'cache')));
+app.use(express.static(path.join(__dirname)));
 
 app.listen(PORT, () => {
     console.log(`=================================`)

@@ -33,17 +33,4 @@ export const CREATE_IMAGE = gql `
   }
 }`
 
-export const FIND_ALL_IMAGES = gql `
-    query findAllImages {
-      findAllImages {
-        _id
-        filename
-        score
-        uploader
-        tags {
-          _id
-          name
-        }
-      }
-    }
-`
+
