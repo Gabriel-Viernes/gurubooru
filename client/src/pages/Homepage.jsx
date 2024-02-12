@@ -24,6 +24,7 @@ export default function Homepage() {
                 <input placeholder='Search tags here!'></input>
             </div>
             <button>Search</button>
+            <p className="notice">Unfortunately, this website does not support Firefox at the moment. Please use a Chromium based browser (Google Chrome, Brave) instead</p>
         </>
     )
 }

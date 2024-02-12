@@ -13,10 +13,10 @@ const Image = mongoose.model(
             ref: "User",
             required: true
         }, 
-        tags: {
+        tags: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: "Tag"
-        },
+        }],
         score: {
             type: Number,
             required: true,
