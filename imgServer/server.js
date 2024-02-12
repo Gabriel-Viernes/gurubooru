@@ -3,25 +3,57 @@ const express = require('express')
 const { v4: uuidv4 } = require('uuid')
 const multer = require('multer')
 
+function parseMimetype(mimetype) {
+    switch(mimetype) {
+        case "image/png":
+            return ".png"
+            break;
+        case "image/jpeg":
+            return ".jpg"
+            break;
+        case "image/gif":
+            return ".gif"
+            break;
+        case "video/webm":
+            return ".webm"
+            break;
+        default:
+            return "invalid"
+            break;
+    }
+    
+}
+ 
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'cache/')
     },
     filename: function (req, file, cb) {
-        console.log(req.body)
-        let ext = '.png'
-        cb(null, `${req.body.filename}${ext}`)
+        cb(null, `${req.body.filename}${parseMimetype(file.mimetype)}`)
     }
 })
-const upload = multer ({ storage: storage})
+const upload = multer ({ 
+    storage: storage,
+    fileFilter: function fileFilter (req, file, cb) {
+        if(parseMimetype(file.mimetype) === "invalid") {
+            console.log('file rejected')
+            cb(null, false)
+        } else {
+            console.log('file accepted!')
+            cb(null, true)
+        }
+    },
+    limits: {
+        maxFileSize: 20000000
+    }
+
+})
 const app = express()
 const PORT = process.env.PORT || 3002;
 
 app.post('/', upload.single('upload'), async (req, res) => {
-    console.log(req.body)
     res.redirect('http://localhost:3000/')
-    
 })
 
 app.use(express.json())

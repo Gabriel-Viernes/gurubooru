@@ -33,6 +33,8 @@ export default function Upload() {
 
     }
 
+    //it is abosulutely necessary that the file upload input remains at the bottom of the form. Do not change it!
+
     return (
             <form className='uploadForm' onSubmit={handleFileUpload}  action='http://localhost:3002' method='post' encType='multipart/form-data'>
                 <textarea name='tags' value="Enter tags here, with each tag separated by a space. Tags with two words should have an underline between each word (Ex: sunset tail steam_engine)"></textarea>
