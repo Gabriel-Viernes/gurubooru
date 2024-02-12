@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 
 export default function Results() {
 
+    document.getElementById('root').style.margin = 0;
 
     const { loading, error, data } = useQuery(FIND_ALL_IMAGES)
     console.log(data)

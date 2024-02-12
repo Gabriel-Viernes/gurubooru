@@ -4,7 +4,7 @@ import { Link, createSearchParams } from "react-router-dom"
 export default function Header() {
     return (
         <div className="component-header">
-            <h1>Gurubooru</h1>
+            <Link to="/"><h1>Gurubooru</h1></Link>
             <ul>
                 {
                     Auth.loggedIn() ? (
