@@ -35,8 +35,8 @@ export default function Signup() {
                 }
             })
             Auth.login(data.createUser.token)
-            window.location.reload()
             alert('Signup successful!')
+            window.location.assign('/')
         } catch (err) {
             alert('There was an error processing your request')
             console.error(err)
