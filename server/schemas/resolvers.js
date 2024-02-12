@@ -71,9 +71,13 @@ const resolvers = {
         createImage: async (parent, args) => {
             if(args) {
                 console.log(args)
-                let regex = /(?<!\S)([a-z]+\b-\b[a-z]+\b[!?.,])(?!\S)|(?<!\S)([a-z]+\b-\b[a-z]+\b)(?!\S)|(?<!\S)([a-z]+[!?.,])(?!\S)|(?<!\S)([a-z]+)(?!\S)|(?<!\S)[?!,.](?!\S)/gm
+                let matches = new Map()
+                let regex = /(?<!\S)([a-z]+)_([a-z]+)(?!\S)|(?<!\S)([a-z]+)(?!\S)/gm
                 let foundTags = [...args.tags.matchAll(regex)]
-                console.log(foundTags)
+                foundTags.map((match) => {
+                    matches.set(match[0],match[0])
+                })
+                console.log(matches)
                 return args
             }
             
