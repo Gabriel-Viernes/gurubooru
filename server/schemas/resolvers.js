@@ -26,7 +26,25 @@ const resolvers = {
         findAllUsers: async (parent, args) => {
             const data = await User.find()
             return data
-        }
+        },
+        findAllTags: async (parent, args) => {
+            const data = await Tag.find()
+            return data
+        },
+        findOneTag: async (parent,args) => {
+            if(args) {
+                const tag = await Tag.findOne({
+                    name:args.name
+                })
+                return tag
+            }
+            
+            throw new GraphQLError('Could not find tag', {
+                extensions: {
+                    code: 'TAG_NOT_FOUND'
+                }
+            })
+        },
     },
     Mutation: {
         createUser: async (parent, args) => {
@@ -81,7 +99,20 @@ const resolvers = {
                 return args
             }
             
+        },
+        createTag: async (parent, args) => {
+            if(args) {
+                const newTag = await Tag.create(args)
+                return newTag
+            } 
+
+            throw new GraphQLError('Unable to create tag', {
+                extensions: {
+                    code: 'UNABLE_TO_CREATE_TAG'
+                }
+            })
         }
+
     }
 }
 
