@@ -1,10 +1,16 @@
-import { Link } from "react-router-dom"
+import { Link, createSearchParams } from "react-router-dom"
+import { useState } from 'react'
 import Auth from '../../utils/auth'
 
 export default function Homepage() {
 
-    function handleInput(name, value) {
+    const [query, setQuery] = useState('')
 
+    const handleInput = function(event) {
+        const { name, value } = event.target
+        if(name === 'queryInput') {
+            setQuery(value)
+        }
     }
 
     return (
@@ -26,9 +32,14 @@ export default function Homepage() {
                         )
                     }
                 </ul>
-                <input placeholder='Search tags here!'></input>
+                <input onChange={handleInput} name='queryInput' placeholder='Search tags here!' value= {query}></input>
             </div>
-            <button><Link to="/results">Search</Link></button>
+            <button><Link to={{
+                pathname:"results",
+                search:`?${createSearchParams({
+                    tags: query
+                })}`
+            }}>Search</Link></button>
             <p className="notice">Unfortunately, this website does not support Firefox at the moment. Please use a Chromium based browser (Google Chrome, Brave) instead</p>
         </>
     )
