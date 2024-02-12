@@ -35,7 +35,17 @@ const resolvers = {
             if(args) {
                 const tag = await Tag.findOne({
                     name:args.name
-                }).populate('imagesWithThisTag')
+                })
+                .populate(
+                    { 
+                        path: 'imagesWithThisTag',
+                        populate: {
+                                path: 'tags'
+                        },
+                        strictPopulate: false 
+                    }
+                )
+               
                 return tag
             }
             
