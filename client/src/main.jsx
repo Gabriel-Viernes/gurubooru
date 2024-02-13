@@ -9,12 +9,14 @@ import App from './App.jsx'
 import Upload from './pages/Upload.jsx'
 import Results from './pages/Results.jsx'
 import SingleImage from './pages/SingleImage.jsx'
+import Loading from './pages/Loading.jsx'
 import './index.css'
 
 const router = createBrowserRouter([
     {
         path:"/",
         element: <App />,
+        errorElement: <Loading />,
         children: [
             {
                 index: true,
@@ -43,6 +45,10 @@ const router = createBrowserRouter([
             {
                 path:'/imgServ/:filename',
                 element: <SingleImage />
+            },
+            {
+                path:'/results/loading/:search',
+                element: <Loading />
             }
         ]
     }

@@ -2,7 +2,7 @@ import { SEARCH_IMAGES, FIND_ALL_IMAGES, FIND_ONE_TAG } from '../../utils/querie
 import { useState } from 'react'
 import { useQuery } from '@apollo/client'
 import Header from '../components/Header.jsx'
-import { Link } from 'react-router-dom'
+import { Link, createSearchParams } from 'react-router-dom'
 
 export default function Results() {
     let tagKeyCount = 0
@@ -71,7 +71,12 @@ YOUR SEARCHES ARE ${search}\n
                     {extractedTags.map((tag) => {
                         tagKeyCount++
                         return (
-                            <Link key={tagKeyCount}>{tag}</Link>
+                            <Link reloadDocument to={{
+                                    pathname:"",
+                                    search:`?${createSearchParams({
+                                        tags: tag
+                                    })}`
+                                }}  key={tagKeyCount}>{tag}</Link>
                         )}
                     )}
                 </div>

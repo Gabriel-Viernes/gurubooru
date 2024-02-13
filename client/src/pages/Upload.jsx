@@ -6,6 +6,10 @@ import Auth from '../../utils/auth.js'
 import { CREATE_IMAGE } from '../../utils/mutations.js'
 
 export default function Upload() {
+    
+    document.getElementById('root').style.margin = 'auto';
+
+
     let decoded;
     if(Auth.loggedIn() === false ) {
         window.location.assign('/login')
@@ -58,11 +62,14 @@ export default function Upload() {
     //it is abosulutely necessary that the file upload input remains at the bottom of the form. Do not change it!
 
     return (
+        <>
+            <h1>Upload Images here!</h1>
             <form className='uploadForm' onSubmit={handleFileUpload}  action='http://localhost:3002' method='post' encType='multipart/form-data'>
                 <textarea onChange={handleInputChange} name='tagsInput' value={tags} placeholder="Enter tags here, with each tag separated by a space. Tags with two words should have an underline between each word (Ex: sunset tail steam_engine)"></textarea>
                 <input name='filename' style={{display: "none"}} value={filename}></input>
                 <input onChange={handleInputChange} type='file' id='upload' name='upload'></input>
                 <button disabled={disableButton} className='submit' value="submit">Upload!</button>
             </form>
+        </>
     )
 }
