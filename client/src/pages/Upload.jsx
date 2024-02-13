@@ -48,7 +48,7 @@ export default function Upload() {
             variables: {
                 filename: `${filename}${mimetype}`,
                 uploader: decoded.data._id,
-                tags: tags
+                tags: `* ${tags}`
             }
         })
         console.log(data)

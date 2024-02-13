@@ -150,7 +150,7 @@ const resolvers = {
                 }).then(async function(createdImage) {
                     console.log(`New image reference created ${createdImage._id}`)
                     let matches = new Map()
-                    let regex = /(?<!\S)([a-z]+)_([a-z]+)(?!\S)|(?<!\S)([a-z]+)(?!\S)/gm
+                    let regex = /(?<!\S)([a-z0-9]+)_([a-z0-9]+)(?!\S)|(?<!\S)([a-z0-9*]+)(?!\S)/gm
                     let foundTags = [...args.tags.matchAll(regex)]
                     foundTags.map((match) => {
                         matches.set(match[0],match[0])
@@ -182,7 +182,7 @@ const resolvers = {
                     })
 
                 })
-                                return args
+                return args
             }
             
         },
