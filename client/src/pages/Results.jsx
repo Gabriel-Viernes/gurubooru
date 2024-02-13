@@ -10,9 +10,6 @@ export default function Results() {
     let search = []
 
     document.getElementById('root').style.margin = 0;
-
-
-
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
     urlParams.forEach((i) => {
@@ -22,18 +19,12 @@ export default function Results() {
     if(search.length === 0) {
         search.push('*')
     }
-    console.log(`
-===================\n
-YOUR SEARCHES ARE ${search}\n
-===================`)
-
     const { loading, error, data } = useQuery(SEARCH_IMAGES, {
         variables: { 
             searchTag: search
         }
     })
     console.log(data)
-
 
     if(loading) {
         console.log('loading...')
@@ -42,7 +33,6 @@ YOUR SEARCHES ARE ${search}\n
     if(error) {
         return <h1>Error!</h1>
     }
-
     
     const extractTagsFromImages = function(data) {
         let length;
@@ -85,7 +75,7 @@ YOUR SEARCHES ARE ${search}\n
                         imageKeyCount++
                         return (
                             <div key={imageKeyCount} className='image-container'>
-                                <Link  to={`http://localhost:3002/${image.filename}`}><img src={`http://localhost:3002/${image.filename}`}></img></Link>
+                                <Link  to={`/results/${image.filename}`}><img src={`http://localhost:3002/${image.filename}${image.mimetype}`}></img></Link>
                                 <p>{`Score: ${image.score}`}</p>
                             </div>
                         )

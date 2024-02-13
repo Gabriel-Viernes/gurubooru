@@ -16,6 +16,7 @@ const typeDefs = `
         uploader: ID
         tags: [Tag]
         score: Int!
+        mimetype: String!
     }
 
     type Tag {
@@ -48,7 +49,7 @@ const typeDefs = `
     type Mutation {
         createUser(username: String!, password:String!): Auth
         loginUser(username: String!, password: String!): Auth
-        createImage(filename: String!, uploader: ID, tags: String): Image
+        createImage(filename: String!, uploader: ID, tags: String, mimetype: String!): Image
         createTag(name: String!, imagesWithThisTag: [tagsAssignedToImage]): Tag
         addTag(pictureId: ID!, tagId: ID!): Image
         addImageToTag(pictureId: ID!, tagId:ID!): Tag

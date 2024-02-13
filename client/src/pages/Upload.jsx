@@ -50,9 +50,10 @@ export default function Upload() {
     async function handleFileUpload() {
         const { data } = await createImage({
             variables: {
-                filename: `${filename}${mimetype}`,
+                filename: `${filename}`,
                 uploader: decoded.data._id,
-                tags: `* ${tags}`
+                tags: `* ${tags}`,
+                mimetype: `${mimetype}`
             }
         })
         console.log(data)

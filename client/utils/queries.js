@@ -1,5 +1,20 @@
 import { gql } from '@apollo/client'
 
+export const FIND_ONE_IMAGE = gql `
+    query findOneImage($filename: String!) {
+      findOneImage(filename: $filename) {
+        _id
+        filename
+        mimetype
+        score
+        tags {
+          name
+        }
+        uploader
+      }
+    }
+`
+
 export const FIND_ONE_USER = gql `
     query findOneUser($username: String!, $password:String!) {
         user {
@@ -19,6 +34,7 @@ export const FIND_ALL_IMAGES = gql `
           _id
           name
         }
+        mimetype
       }
     }
 `
@@ -52,6 +68,7 @@ export const SEARCH_IMAGES = gql `
           name
         }
         uploader
+        mimetype
       }
     }
 `
