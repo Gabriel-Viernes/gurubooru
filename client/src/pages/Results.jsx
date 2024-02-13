@@ -75,7 +75,7 @@ export default function Results() {
                         imageKeyCount++
                         return (
                             <div key={imageKeyCount} className='image-container'>
-                                <Link  to={`/results/${image.filename}`}><img src={`http://localhost:3002/${image.filename}${image.mimetype}`}></img></Link>
+                                <Link  to={`/results/${image.filename}`}><img src={`https://gurubooru-image-server-5f422bc852c2.herokuapp.com/${image.filename}${image.mimetype}`}></img></Link>
                                 <p>{`Score: ${image.score}`}</p>
                             </div>
                         )

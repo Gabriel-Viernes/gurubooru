@@ -45,7 +45,7 @@ export default function SingleImage() {
                         )}
                     )}
                 </div>
-                <img src={`http://localhost:3002/${matched}.png`}></img>
+                <img src={`https://gurubooru-image-server-5f422bc852c2.herokuapp.com/${matched}.png`}></img>
             </div>
         </>
     )
