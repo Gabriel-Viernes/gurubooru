@@ -43,7 +43,7 @@ const router = createBrowserRouter([
                 element: <Results />
             },
             {
-                path:'/imgServ/:filename',
+                path:'/results/:filename',
                 element: <SingleImage />
             },
             {

@@ -60,6 +60,7 @@ const resolvers = {
             return data
         },
         findOneImage: async (parent, args) => {
+            console.log(args)
             if(args) {
                 const data = await Image.findOne({
                     filename: args.filename
@@ -143,11 +144,12 @@ const resolvers = {
         },
         createImage: async (parent, args) => {
             console.log(`gql filename: ${args.filename}`)
-            let createdImage
             if(args) {
                 await Image.create({
                     filename: args.filename,
-                    uploader: args.uploader
+                    uploader: args.uploader,
+                    mimetype: args.mimetype
+
                 }).then(async function(createdImage) {
                     console.log(`New image reference created ${createdImage._id}`)
                     let matches = new Map()

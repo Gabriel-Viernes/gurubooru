@@ -50,7 +50,7 @@
 .signup, .uploadForm {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 25%;
     margin: auto;
 
 }
@@ -70,6 +70,7 @@
     text-decoration: none;
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .component-header li {

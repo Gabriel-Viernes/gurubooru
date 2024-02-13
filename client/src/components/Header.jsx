@@ -35,18 +35,24 @@ export default function Header() {
                         <>
                             <li><Link to='/login'>Login</Link></li>
                             <li><Link to='/signup'>Signup</Link></li>
-                            <li><input onChange={handleInput} name='queryInput' placeholder='Search tags here!' value= {query}></input></li>
-                            <li><button><Link reloadDocument name="submit" to={{
-                    pathname:"",
-                    search:`?${createSearchParams({
-                        tags: submit
-                    })}`
-                }}>Search</Link></button></li>
 
                         </>
                     )
                 }
-
+                <li><input onChange={handleInput} name='queryInput' placeholder='Search tags here!' value= {query}></input></li>
+                <li>
+                    <button>
+                        <Link reloadDocument name="submit" to={
+                            {
+                                pathname:"",
+                                search:`?${createSearchParams({
+                                    tags: submit
+                                })}`
+                            }}>
+                            Search
+                        </Link>
+                    </button>
+                </li>
             </ul>
         </div>
 

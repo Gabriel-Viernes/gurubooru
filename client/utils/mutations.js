@@ -25,8 +25,8 @@ export const LOGIN_USER = gql `
 `
 
 export const CREATE_IMAGE = gql `
-    mutation createImage($filename: String!, $uploader: ID, $tags: String) {
-  createImage(filename: $filename, uploader: $uploader, tags:$tags) {
+    mutation createImage($filename: String!, $uploader: ID, $tags: String, $mimetype: String!) {
+  createImage(filename: $filename, uploader: $uploader, tags:$tags, mimetype: $mimetype) {
     filename
     score
     uploader
