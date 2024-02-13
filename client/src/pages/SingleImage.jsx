@@ -45,7 +45,7 @@ export default function SingleImage() {
                         )}
                     )}
                 </div>
-                <img src={`https://gurubooru-image-server-5f422bc852c2.herokuapp.com/${matched}.png`}></img>
+                <img src={`https://gurubooru-image-server-5f422bc852c2.herokuapp.com/${matched}${data.findOneImage.mimetype}`}></img>
             </div>
         </>
     )
