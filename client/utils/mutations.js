@@ -31,6 +31,6 @@ export const CREATE_IMAGE = gql `
     score
     uploader
   }
-}
+}`
 
-`
+

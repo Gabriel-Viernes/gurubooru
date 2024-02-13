@@ -7,3 +7,51 @@ export const FIND_ONE_USER = gql `
             password
         }
     }`
+
+export const FIND_ALL_IMAGES = gql `
+    query findAllImages {
+      findAllImages {
+        _id
+        filename
+        score
+        uploader
+        tags {
+          _id
+          name
+        }
+      }
+    }
+`
+
+export const FIND_ONE_TAG = gql `
+    query FindOneTag($name: String!) {
+      findOneTag(name: $name) {
+        _id
+        imagesWithThisTag {
+          uploader
+          score
+          filename
+          _id
+          tags {
+            name
+          }
+        }
+        name
+      }
+    }
+
+`
+
+export const SEARCH_IMAGES = gql `
+    query searchImages($searchTag: [String]) {
+      searchImages(searchTag: $searchTag) {
+        _id
+        filename
+        score
+        tags {
+          name
+        }
+        uploader
+      }
+    }
+`
