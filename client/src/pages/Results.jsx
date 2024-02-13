@@ -16,11 +16,23 @@ export default function Results() {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
     urlParams.forEach((i) => {
-        
+        search.push(i)
+        console.log(search)
     })
+    if(search.length === 0) {
+        search.push('*')
+    }
+    console.log(`
+===================\n
+YOUR SEARCHES ARE ${search}\n
+===================`)
+
     const { loading, error, data } = useQuery(SEARCH_IMAGES, {
-        searchTags
+        variables: { 
+            searchTag: search
+        }
     })
+    console.log(data)
 
 
     if(loading) {
@@ -36,9 +48,9 @@ export default function Results() {
         let length;
         let tagList = new Map()
         let tagArray = []
-        data.findAllImages.length > 50 ? length = 50 : length = data.findAllImages.length
+        data.searchImages.length > 50 ? length = 50 : length = data.searchImages.length
         for(let i = 0; i < length; i++) {
-            data.findAllImages[i].tags.forEach((tag) => {
+            data.searchImages[i].tags.forEach((tag) => {
                 tagList.set(tag.name,tag.name)
             })
         }
@@ -48,8 +60,8 @@ export default function Results() {
         return tagArray
     }
     const extractedTags = extractTagsFromImages(data)
-    //filename path is data.findAllImages[i].filename
-    if(data) {
+    console.log(data.searchImages.length)
+    if(data && data.searchImages.length != 0) {
         return (
         <>
             <Header />
@@ -64,7 +76,7 @@ export default function Results() {
                     )}
                 </div>
                 <div className='image-section'>
-                    {data.findAllImages.map((image) => {
+                    {data.searchImages.map((image) => {
                         imageKeyCount++
                         return (
                             <div key={imageKeyCount} className='image-container'>
@@ -77,6 +89,12 @@ export default function Results() {
             </div>
         </>
     )
-
+    } else {
+        return (
+            <>
+                <Header />
+                <h1>No images found with that tag :(</h1>
+            </>
+        )
     }
 }

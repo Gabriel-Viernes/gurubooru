@@ -74,6 +74,7 @@ const resolvers = {
             })
         },
         searchImages: async (parent, args) => {
+            console.log(`Searchtag is ${args.searchTag}`)
             let foundImage
             if(args) {
                 await Tag.find({

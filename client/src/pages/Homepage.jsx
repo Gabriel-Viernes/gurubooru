@@ -23,8 +23,6 @@ export default function Homepage() {
             }
             setSubmit(search)
         }
-        console.log(search)
-        console.log(submit)
     }
 
     return (
