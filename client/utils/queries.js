@@ -41,3 +41,17 @@ export const FIND_ONE_TAG = gql `
     }
 
 `
+
+export const SEARCH_IMAGES = gql `
+    query searchImages($searchTag: [String]) {
+      searchImages(searchTag: $searchTag) {
+        _id
+        filename
+        score
+        tags {
+          name
+        }
+        uploader
+      }
+    }
+`

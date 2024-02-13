@@ -1,4 +1,4 @@
-import { FIND_ALL_IMAGES, FIND_ONE_TAG } from '../../utils/queries'
+import { SEARCH_IMAGES, FIND_ALL_IMAGES, FIND_ONE_TAG } from '../../utils/queries'
 import { useState } from 'react'
 import { useQuery } from '@apollo/client'
 import Header from '../components/Header.jsx'
@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 export default function Results() {
     let tagKeyCount = 0
     let imageKeyCount = 0
-    const [search, setSearch] = useState('')
+    let search = []
 
     document.getElementById('root').style.margin = 0;
 
@@ -16,21 +16,19 @@ export default function Results() {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
     urlParams.forEach((i) => {
-        setSearch(i)
-    })
-    if(search != '') {
-        var { loading, error, data } = useQuery(FIND_ONE_TAG)
-    } else {
         
-    }
+    })
+    const { loading, error, data } = useQuery(SEARCH_IMAGES, {
+        searchTags
+    })
 
-    if(urlParams.size === 0) {
-        <h1>test</h1>
-    }
 
     if(loading) {
         console.log('loading...')
         return <h1>Fetching images...</h1>
+    }
+    if(error) {
+        return <h1>Error!</h1>
     }
 
     
