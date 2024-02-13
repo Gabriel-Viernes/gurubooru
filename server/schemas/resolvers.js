@@ -72,6 +72,32 @@ const resolvers = {
                     code: 'IMAGE_NOT_FOUND'
                 }
             })
+        },
+        searchImages: async (parent, args) => {
+            let foundImage
+            if(args) {
+                await Tag.find({
+                    name: args.searchTag
+                }).then(async function(data) {
+                    console.log(data)
+                    console.log(data._id)
+                    let ids = []
+                    data.forEach((tag) => {
+                        ids.push(tag._id)
+                    })
+                    console.log(ids)
+                    foundImage = await Image.find({
+                        tags: { $all: [...ids] }
+                    }).populate('tags')
+                })
+                return foundImage
+            } 
+
+            throw new GraphQLError('Could not find image with provided tags', {
+                extensions: {
+                    code: 'IMAGE_NOT_FOUND'
+                }
+            })
         }
     },
     Mutation: {

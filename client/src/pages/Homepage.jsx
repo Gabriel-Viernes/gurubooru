@@ -4,7 +4,6 @@ import Auth from '../../utils/auth'
 
 export default function Homepage() {
 
-    console.log(document.getElementById('root').style.margin)
     document.getElementById('root').style.margin = 'auto'
 
     const [query, setQuery] = useState('')
@@ -18,7 +17,7 @@ export default function Homepage() {
 
     return (
         <>
-            <div classname="home-container">
+            <div className="home-container">
                 <div className="home">
                     <h1>Gurubooru</h1>
                     <ul>

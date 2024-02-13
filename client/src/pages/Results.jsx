@@ -1,24 +1,35 @@
-import { FIND_ALL_IMAGES } from '../../utils/queries'
+import { FIND_ALL_IMAGES, FIND_ONE_TAG } from '../../utils/queries'
 import { useState } from 'react'
 import { useQuery } from '@apollo/client'
 import Header from '../components/Header.jsx'
 import { Link } from 'react-router-dom'
 
 export default function Results() {
+    let tagKeyCount = 0
+    let imageKeyCount = 0
+    const [search, setSearch] = useState('')
 
     document.getElementById('root').style.margin = 0;
-    
-        const { loading, error, data } = useQuery(FIND_ALL_IMAGES)
+
+
 
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
-    console.log(urlParams.get('tags'))
-    if(urlParams === '') {
+    urlParams.forEach((i) => {
+        setSearch(i)
+    })
+    if(search != '') {
+        var { loading, error, data } = useQuery(FIND_ONE_TAG)
     } else {
+        
+    }
 
+    if(urlParams.size === 0) {
+        <h1>test</h1>
     }
 
     if(loading) {
+        console.log('loading...')
         return <h1>Fetching images...</h1>
     }
 
@@ -39,25 +50,27 @@ export default function Results() {
         return tagArray
     }
     const extractedTags = extractTagsFromImages(data)
-    console.log(extractedTags)
     //filename path is data.findAllImages[i].filename
-       return (
+    if(data) {
+        return (
         <>
             <Header />
             <div className='content-container'>
                 <div className='tag-list'>
                     <h4>Tags</h4>
                     {extractedTags.map((tag) => {
+                        tagKeyCount++
                         return (
-                            <Link>{tag}</Link>
+                            <Link key={tagKeyCount}>{tag}</Link>
                         )}
                     )}
                 </div>
                 <div className='image-section'>
                     {data.findAllImages.map((image) => {
+                        imageKeyCount++
                         return (
-                            <div className='image-container'>
-                                <Link to={`http://localhost:3002/${image.filename}`}><img src={`http://localhost:3002/${image.filename}`}></img></Link>
+                            <div key={imageKeyCount} className='image-container'>
+                                <Link  to={`http://localhost:3002/${image.filename}`}><img src={`http://localhost:3002/${image.filename}`}></img></Link>
                                 <p>{`Score: ${image.score}`}</p>
                             </div>
                         )
@@ -66,4 +79,6 @@ export default function Results() {
             </div>
         </>
     )
+
+    }
 }

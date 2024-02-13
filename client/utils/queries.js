@@ -22,3 +22,22 @@ export const FIND_ALL_IMAGES = gql `
       }
     }
 `
+
+export const FIND_ONE_TAG = gql `
+    query FindOneTag($name: String!) {
+      findOneTag(name: $name) {
+        _id
+        imagesWithThisTag {
+          uploader
+          score
+          filename
+          _id
+          tags {
+            name
+          }
+        }
+        name
+      }
+    }
+
+`
