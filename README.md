@@ -17,11 +17,13 @@ Gurubooru is yet another in a long line of imageboorus, a community-run website 
 
 ## Deployment
 
-Heroku was used to deploy the application.
+Deployed application:
 
-Click the link below to see the deployed application:
+https://gurubooru-275b322c18f4.herokuapp.com/
 
-https://joosbox-9e68743f6da7.herokuapp.com/login
+Deployed Image Server:
+
+https://gurubooru-image-server-5f422bc852c2.herokuapp.com/
 
 ## Authors
 
