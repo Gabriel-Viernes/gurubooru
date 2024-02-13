@@ -19,11 +19,6 @@ export default function Results() {
     if(search.length === 0) {
         search.push('*')
     }
-    console.log(`
-===================\n
-YOUR SEARCHES ARE ${search}\n
-===================`)
-
     const { loading, error, data } = useQuery(SEARCH_IMAGES, {
         variables: { 
             searchTag: search
