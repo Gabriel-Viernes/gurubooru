@@ -35,7 +35,17 @@ const resolvers = {
             if(args) {
                 const tag = await Tag.findOne({
                     name:args.name
-                }).populate('imagesWithThisTag')
+                })
+                .populate(
+                    { 
+                        path: 'imagesWithThisTag',
+                        populate: {
+                                path: 'tags'
+                        },
+                        strictPopulate: false 
+                    }
+                )
+               
                 return tag
             }
             
@@ -58,6 +68,33 @@ const resolvers = {
             }
 
             throw new GraphQLError('Could not find image', {
+                extensions: {
+                    code: 'IMAGE_NOT_FOUND'
+                }
+            })
+        },
+        searchImages: async (parent, args) => {
+            console.log(`Searchtag is ${args.searchTag}`)
+            let foundImage
+            if(args) {
+                await Tag.find({
+                    name: args.searchTag
+                }).then(async function(data) {
+                    console.log(data)
+                    console.log(data._id)
+                    let ids = []
+                    data.forEach((tag) => {
+                        ids.push(tag._id)
+                    })
+                    console.log(ids)
+                    foundImage = await Image.find({
+                        tags: { $all: [...ids] }
+                    }).populate('tags')
+                })
+                return foundImage
+            } 
+
+            throw new GraphQLError('Could not find image with provided tags', {
                 extensions: {
                     code: 'IMAGE_NOT_FOUND'
                 }
@@ -105,6 +142,7 @@ const resolvers = {
             })
         },
         createImage: async (parent, args) => {
+            console.log(`gql filename: ${args.filename}`)
             let createdImage
             if(args) {
                 await Image.create({
@@ -113,7 +151,7 @@ const resolvers = {
                 }).then(async function(createdImage) {
                     console.log(`New image reference created ${createdImage._id}`)
                     let matches = new Map()
-                    let regex = /(?<!\S)([a-z]+)_([a-z]+)(?!\S)|(?<!\S)([a-z]+)(?!\S)/gm
+                    let regex = /(?<!\S)([a-z0-9]+)_([a-z0-9]+)(?!\S)|(?<!\S)([a-z0-9*]+)(?!\S)/gm
                     let foundTags = [...args.tags.matchAll(regex)]
                     foundTags.map((match) => {
                         matches.set(match[0],match[0])
@@ -145,7 +183,7 @@ const resolvers = {
                     })
 
                 })
-                                return args
+                return args
             }
             
         },

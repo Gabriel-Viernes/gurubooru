@@ -27,7 +27,6 @@ class AuthService {
         } else {
             console.log('No token found!')
         }
-        console.log(tokenExistsFlag, isTokenExpired)
         if ((tokenExistsFlag === true) && (isTokenExpired === false)) {
             return true
         }

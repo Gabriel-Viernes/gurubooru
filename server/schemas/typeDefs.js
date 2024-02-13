@@ -37,6 +37,7 @@ const typeDefs = `
         findOneTag(name: String!): Tag
         findAllImages: [Image]
         findOneImage(filename: String!): Image
+        searchImages(searchTag: [String]): [Image]
 
     }
 

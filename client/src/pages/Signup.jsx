@@ -5,6 +5,8 @@ import Auth from '../../utils/auth'
 import { Link } from 'react-router-dom'
 
 export default function Signup() {
+
+    document.getElementById('root').style.margin = 'auto'
     const [userFormData, setUserFormData] = useState({ username: '', password: ''})
     const [createUser, {error}] = useMutation(CREATE_USER)
 

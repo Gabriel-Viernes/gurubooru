@@ -1,21 +1,8 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
   text-align: center;
-}
+    margin: 0;
+    width: 100%;
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
 @keyframes logo-spin {
@@ -33,12 +20,8 @@
   }
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.home-container {
+    margin: auto;
 }
 
 .home {
@@ -67,5 +50,84 @@
 .signup, .uploadForm {
     display: flex;
     flex-direction: column;
+    width: 50%;
+    margin: auto;
+
 }
 
+
+.component-header {
+    text-align: left;
+}
+
+.component-header h1 {
+    margin: 0;
+}
+
+.component-header ul {
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.component-header li {
+    color: black;
+    padding: 0 1em 0 1em;
+}
+
+.content-container {
+    width:100%;
+    display: grid;
+    grid-template-columns: 20% 80%;
+}
+
+.image-section {
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    column-gap: .5em;
+}
+
+@media screen and (max-width: 1700px) {
+    .image-section {
+        grid-template-columns: 25% 25% 25% 25%;
+    }
+}
+
+@media screen and (max-width: 1350px) {
+    .image-section {
+        grid-template-columns: 33% 33% 33%;
+    }
+}
+
+@media screen and (max-width: 1050px) {
+    .image-section {
+        grid-template-columns: 50% 50%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .image-section {
+        grid-template-columns: 100%;
+    }
+}
+
+.image-container {
+    height: 300px;
+    margin: .5em;
+}
+
+.image-container img {
+    height: 150px;
+}
+
+.tag-list {
+    padding-left: 1em;
+    display: block;
+    text-align: left;
+}
+
+.tag-list a {
+    display: block;
+}
