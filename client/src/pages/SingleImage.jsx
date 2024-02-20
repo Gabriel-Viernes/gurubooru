@@ -2,12 +2,12 @@ import { FIND_ONE_IMAGE } from '../../utils/queries.js'
 import { useQuery } from '@apollo/client'
 import Header from '../components/Header.jsx'
 import { Link, createSearchParams } from 'react-router-dom'
+import current from '../../utils/environmentUrlResolver.js'
 
 export default function SingleImage() {
     let tagKeyCount = 0
     let filenameRegex = /([a-z0-9-_.]+)$/gm
     let matched = window.location.href.match(filenameRegex)
-    console.log(matched)
     const { loading, error, data } = useQuery(FIND_ONE_IMAGE, {
         variables: {
             filename: `${matched}`
@@ -26,7 +26,6 @@ export default function SingleImage() {
         )
     }
 
-    console.log(data)
     return (
         <>
             <Header />
@@ -45,7 +44,7 @@ export default function SingleImage() {
                         )}
                     )}
                 </div>
-                <img src={`https://gurubooru-image-server-5f422bc852c2.herokuapp.com/${matched}${data.findOneImage.mimetype}`}></img>
+                <img src={`${current.imageServerUrl}/${matched}${data.findOneImage.mimetype}`}></img>
             </div>
         </>
     )

@@ -2,8 +2,8 @@
   "name": "gurubooru",
   "version": "1.0.0",
   "engines": {
-        "node":"21.6.1"
-    },
+    "node": "21.6.1"
+  },
   "description": "",
   "main": "server/server.js",
   "scripts": {
@@ -20,6 +20,7 @@
     "concurrently": "^5.3.0"
   },
   "dependencies": {
+    "dotenv": "^16.4.5",
     "jsonwebtoken": "^9.0.2"
   }
 }

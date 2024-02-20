@@ -1,6 +1,9 @@
 import { Link, createSearchParams } from "react-router-dom"
 import { useState } from 'react'
 import Auth from '../../utils/auth'
+import current from '../../utils/environmentUrlResolver.js'
+
+
 
 export default function Homepage() {
 

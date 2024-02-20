@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useQuery } from '@apollo/client'
 import Header from '../components/Header.jsx'
 import { Link, createSearchParams } from 'react-router-dom'
+import current from '../../utils/environmentUrlResolver.js'
 
 export default function Results() {
     let tagKeyCount = 0
@@ -14,7 +15,6 @@ export default function Results() {
     const urlParams = new URLSearchParams(queryString)
     urlParams.forEach((i) => {
         search.push(i)
-        console.log(search)
     })
     if(search.length === 0) {
         search.push('*')
@@ -24,10 +24,8 @@ export default function Results() {
             searchTag: search
         }
     })
-    console.log(data)
 
     if(loading) {
-        console.log('loading...')
         return <h1>Fetching images...</h1>
     }
     if(error) {
@@ -50,7 +48,6 @@ export default function Results() {
         return tagArray
     }
     const extractedTags = extractTagsFromImages(data)
-    console.log(data.searchImages.length)
     if(data && data.searchImages.length != 0) {
         return (
         <>
@@ -75,7 +72,7 @@ export default function Results() {
                         imageKeyCount++
                         return (
                             <div key={imageKeyCount} className='image-container'>
-                                <Link  to={`/results/${image.filename}`}><img src={`https://gurubooru-image-server-5f422bc852c2.herokuapp.com/${image.filename}${image.mimetype}`}></img></Link>
+                                <Link  to={`/results/${image.filename}`}><img src={`${current.imageServerUrl}/${image.filename}${image.mimetype}`}></img></Link>
                                 <p>{`Score: ${image.score}`}</p>
                             </div>
                         )
