@@ -27,11 +27,24 @@ const client = new ApolloClient({
     cache: new InMemoryCache
 })
 
+//local dev
+//'http://localhost:3001'
+//'http://localhost:3002'
+
+//production
+//'https://gurubooru-275b322c18f4.herokuapp.com/'
+//'https://gurubooru-image-server-5f422bc852c2.herokuapp.com/'
+
+
 function App() {
+    const [url, setUrl] = useState('http://localhost:3001')
+    const [imageServerUrl, setImageServerUrl] = useState('http://localhost:3002')
+
+    console.log(url)
 
     return (
         <ApolloProvider client={client}>
-            <Outlet />
+            <Outlet url={url} imageServerUrl={imageServerUrl} />
         </ApolloProvider>
     )
 }

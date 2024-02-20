@@ -5,7 +5,11 @@ import decode from 'jwt-decode'
 import Auth from '../../utils/auth.js'
 import { CREATE_IMAGE } from '../../utils/mutations.js'
 
+
+
+
 export default function Upload() {
+
     
     document.getElementById('root').style.margin = 'auto';
 
