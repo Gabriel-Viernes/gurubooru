@@ -4,6 +4,7 @@ import { v4 as uuid } from 'uuid'
 import decode from 'jwt-decode'
 import Auth from '../../utils/auth.js'
 import { CREATE_IMAGE } from '../../utils/mutations.js'
+import current from '../../utils/environmentUrlResolver.js'
 
 
 
@@ -25,7 +26,6 @@ export default function Upload() {
     const [mimetype, setMimetype] = useState('')
     const [disableButton, setDisableButton] = useState(true)
     const [filename, setFilename] = useState(uuid())
-    console.log(filename)
 
     const [createImage, { error }] = useMutation(CREATE_IMAGE)
     //const [add]
@@ -39,7 +39,6 @@ export default function Upload() {
         }
         if(name === "upload") {
             let matchArray = value.match(mimetypeRegex)
-            console.log(matchArray)
             if(matchArray === null) {
                 setDisableButton(true)
                 alert('Invalid filetype detected, please upload only png, jpg, or gif')
@@ -60,7 +59,6 @@ export default function Upload() {
                 mimetype: `${mimetype}`
             }
         })
-        console.log(data)
 
     }
 
@@ -69,9 +67,9 @@ export default function Upload() {
     return (
         <>
             <h1>Upload Images here!</h1>
-            <form className='uploadForm' onSubmit={handleFileUpload}  action='https://gurubooru-image-server-5f422bc852c2.herokuapp.com/' method='post' encType='multipart/form-data'>
+            <form className='uploadForm' onSubmit={handleFileUpload}  action={current.imageServerUrl} method='post' encType='multipart/form-data'>
                 <textarea onChange={handleInputChange} name='tagsInput' value={tags} placeholder="Enter tags here, with each tag separated by a space. Tags with two words should have an underline between each word (Ex: sunset tail steam_engine)"></textarea>
-                <input name='filename' style={{display: "none"}} value={filename}></input>
+                <input name='filename' style={{display: "none"}} value={filename} readOnly></input>
                 <input onChange={handleInputChange} type='file' id='upload' name='upload'></input>
                 <button disabled={disableButton} className='submit' value="submit">Upload!</button>
             </form>

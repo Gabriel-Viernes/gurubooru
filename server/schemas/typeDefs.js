@@ -1,13 +1,10 @@
 
 const typeDefs = `
-
-
     type User {
         _id: ID
         username: String!
         password: String!
         uploads: [Image]
-        
     }
 
     type Image {
