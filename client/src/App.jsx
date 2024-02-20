@@ -37,14 +37,9 @@ const client = new ApolloClient({
 
 
 function App() {
-    const [url, setUrl] = useState('http://localhost:3001')
-    const [imageServerUrl, setImageServerUrl] = useState('http://localhost:3002')
-
-    console.log(url)
-
     return (
         <ApolloProvider client={client}>
-            <Outlet url={url} imageServerUrl={imageServerUrl} />
+            <Outlet />
         </ApolloProvider>
     )
 }

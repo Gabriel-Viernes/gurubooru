@@ -1,12 +1,13 @@
 import { Link, createSearchParams } from "react-router-dom"
 import { useState } from 'react'
 import Auth from '../../utils/auth'
+import current from '../../utils/environmentUrlResolver.js'
 
 
-export default function Homepage({ url, imageServerUrl }) {
+
+export default function Homepage() {
 
     document.getElementById('root').style.margin = 'auto'
-
 
     let regex = /(?<!\S)([a-z0-9]+)_([a-z0-9]+)(?!\S)|(?<!\S)([a-z0-9*]+)(?!\S)/gm
     const [query, setQuery] = useState('')

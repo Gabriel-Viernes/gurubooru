@@ -3,7 +3,6 @@ const express = require('express')
 const { ApolloServer } = require('@apollo/server')
 const { expressMiddleware } = require('@apollo/server/express4')
 const path = require('path')
-require('dotenv').config({ path: '../.env'})
 
 //server files imports
 const { typeDefs, resolvers } = require('./schemas')
