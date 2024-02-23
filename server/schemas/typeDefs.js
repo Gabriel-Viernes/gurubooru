@@ -48,7 +48,7 @@ const typeDefs = `
         loginUser(username: String!, password: String!): Auth
         createImage(filename: String!, uploader: ID, tags: String, mimetype: String!): Image
         createTag(name: String!, imagesWithThisTag: [tagsAssignedToImage]): Tag
-        addTag(pictureId: ID!, tagId: ID!): Image
+        addTag(imageFilename: String!, tagName: String!): Image
         addImageToTag(pictureId: ID!, tagId:ID!): Tag
     }
 `

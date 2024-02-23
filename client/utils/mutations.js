@@ -33,4 +33,17 @@ export const CREATE_IMAGE = gql `
   }
 }`
 
-
+export const ADD_TAG = gql `
+    mutation addTag($imageFilename: String!, $tagName: String!) {
+      addTag(imageFilename: $imageFilename, tagName: $tagName) {
+        _id
+        filename
+        mimetype
+        score
+        tags {
+          name
+        }
+        uploader
+      }
+    }
+`

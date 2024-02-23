@@ -1,6 +1,6 @@
 const current = {
     url:'http://localhost:3000',
-    imageServerUrl:'https://localhost:3002'
+    imageServerUrl:'http://localhost:3002'
 }
 
 export default current

@@ -55,6 +55,12 @@
 
 }
 
+.addTagForm {
+    display:flex;
+    flex-direction: column;
+    width: 25%;
+    margin: 0;
+}
 
 .component-header {
     text-align: left;
@@ -125,8 +131,10 @@
 
 .tag-list {
     padding-left: 1em;
-    display: block;
+    display: flex;
+    flex-direction: column;
     text-align: left;
+    align-items: left;
 }
 
 .tag-list a {

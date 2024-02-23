@@ -206,13 +206,43 @@ const resolvers = {
             })
         },
         addTag: async (parent, args) => {
+            let updatedImage;
             if(args) {
-                const data = Image.findOneAndUpdate(
-                    { _id: args.pictureId },
-                    { $push: { tags: args.tagId }},
-                    { new: true }
-                ).populate('tags')
-                return data
+                await Tag.findOne(
+                    { name: args.tagName }
+                ).then(async function(tag) {
+                    console.log(tag)
+                    if(tag) {
+                        await Image.findOneAndUpdate(
+                            { filename: args.imageFilename },
+                            { $push: { tags: tag._id }},
+                            { new: true }
+                        ).populate('tags').then((image) => {
+                            updatedImage = image
+                        })
+                    } else {
+                        await Image.findOne(
+                            { filename: args.imageFilename }
+                        ).then(async function(image) {
+                            console.log(image)
+                            await Tag.create({
+                                name: args.tagName,
+                                imagesWithThisTag: [image._id]
+                            }).then(async function(createdTag) {
+                                console.log(`createdTag ${createdTag}`)
+                                await Image.findOneAndUpdate(
+                                    { filename: args.imageFilename },
+                                    { $push: { tags: createdTag._id }},
+                                    { new: true }
+                                ).populate('tags').then((image) => {
+                                    updatedImage = image
+                                })
+                            })
+                        })
+                    }
+                })
+                console.log(updatedImage)
+                return updatedImage
             }
             
             throw new GraphQLError('Unable to add tag to image', {
