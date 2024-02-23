@@ -206,6 +206,19 @@ const resolvers = {
             })
         },
         addTag: async (parent, args) => {
+            await Image.findOne(
+                { filename: args.imageFilename}
+            ).populate('tags').then( function(image) {
+                for(let i = 0; i < image.tags.length; i++) {
+                    if(image.tags[i].name == args.tagName) {
+                        throw new GraphQLError('Image already has this tag', {
+                            extensions: {
+                                code: 'DUPLICATE_TAG_ON_IMAGE'
+                            }
+                        })
+                    }
+                }
+            })
             let updatedImage;
             if(args) {
                 await Tag.findOne(

@@ -46,6 +46,9 @@ export default function SingleImage() {
         })
     }
 
+    if(addTag[1].error) {
+        alert(`${addTag[1].error}`)
+    }
     if(findOneImage.loading) {
         return (
             <h1>Loading...</h1>
